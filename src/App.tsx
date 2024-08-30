@@ -1,26 +1,87 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import Grid from "./components/Grid";
+import Keyboard from "./components/Keyboard";
+import Modal from "./components/Modal";
+import { validateWord } from "./components/utils/validateWord";
+import { fetchWord } from "./api";
 
-function App() {
+const App: React.FC = () => {
+  const [guesses, setGuesses] = useState<string[]>([]);
+  const [feedback, setFeedback] = useState<string[][]>([]);
+  const [currentGuess, setCurrentGuess] = useState<string>("");
+  const [gameState, setGameState] = useState<"win" | "loss" | "in-progress">(
+    "in-progress"
+  );
+  const [targetWord, setTargetWord] = useState<string>("");
+
+  const fetchData = async () => {
+    const word = await fetchWord();
+    setTargetWord(word);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (gameState !== "in-progress") return;
+
+      if (event.key === "Enter") {
+        handleEnter();
+      } else if (event.key === "Backspace") {
+        handleBackspace();
+      } else if (/^[a-zA-Z]$/.test(event.key)) {
+        handleLetterInput(event.key.toUpperCase());
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [currentGuess, gameState]);
+
+  const handleLetterInput = (letter: string) => {
+    if (currentGuess.length < 5 && gameState === "in-progress") {
+      setCurrentGuess((prev) => prev + letter);
+    }
+  };
+
+  const handleBackspace = () => {
+    if (gameState === "in-progress") {
+      setCurrentGuess((prev) => prev.slice(0, -1));
+    }
+  };
+
+  const handleEnter = () => {
+    if (currentGuess.length === 5 && gameState === "in-progress") {
+      const currentFeedback = validateWord(currentGuess, targetWord);
+      setGuesses([...guesses, currentGuess]);
+      setFeedback([...feedback, currentFeedback]);
+
+      if (currentGuess.toLocaleLowerCase() === targetWord) {
+        setGameState("win");
+      } else if (guesses.length === 4) {
+        setGameState("loss");
+      }
+
+      setCurrentGuess("");
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Grid guesses={guesses} feedback={feedback} currentGuess={currentGuess} />
+      <Keyboard
+        onLetter={handleLetterInput}
+        onBackspace={handleBackspace}
+        onEnter={handleEnter}
+      />
+      {gameState !== "in-progress" && <Modal gameState={gameState} />}
     </div>
   );
-}
+};
 
 export default App;
