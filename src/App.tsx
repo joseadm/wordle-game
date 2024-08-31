@@ -56,32 +56,21 @@ const App: React.FC = () => {
       setCurrentGuess((prev) => prev.slice(0, -1));
     }
   };
-  const handleEnter = async () => {
+
+  const handleEnter = () => {
     if (currentGuess.length === 5 && gameState === "in-progress") {
       const currentFeedback = validateWord(currentGuess, targetWord);
-      const isValidWord = await checkDictionary(currentGuess); // Add this line
+      setGuesses([...guesses, currentGuess]);
+      setFeedback([...feedback, currentFeedback]);
 
-      if (isValidWord) {
-        setGuesses([...guesses, currentGuess]);
-        setFeedback([...feedback, currentFeedback]);
-
-        if (currentGuess.toLocaleLowerCase() === targetWord) {
-          setGameState("win");
-        } else if (guesses.length === 4) {
-          setGameState("loss");
-        }
-
-        setCurrentGuess("");
-      } else {
-        // Handle invalid word
+      if (currentGuess.toLocaleLowerCase() === targetWord) {
+        setGameState("win");
+      } else if (guesses.length === 4) {
+        setGameState("loss");
       }
-    }
-  };
 
-  const checkDictionary = async (word: string): Promise<boolean> => {
-    const response = await fetch(`https://api.dictionary.com/api/v3/references/collegiate/json/${word}`);
-    const data = await response.json();
-    return Array.isArray(data) && data.length > 0;
+      setCurrentGuess("");
+    }
   };
 
   const { i18n } = useTranslation();
