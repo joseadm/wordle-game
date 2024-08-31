@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { Suspense, useState, useEffect, useCallback } from "react";
 import Grid from "./components/Grid";
 import Keyboard from "./components/Keyboard";
 import Modal from "./components/Modal";
 import { validateWord } from "./components/utils/validateWord";
 import { fetchWord } from "./api";
+import Loading from "./Loading";
+import { useTranslation } from "react-i18next";
 
 const App: React.FC = () => {
   const [guesses, setGuesses] = useState<string[]>([]);
@@ -14,14 +16,14 @@ const App: React.FC = () => {
   );
   const [targetWord, setTargetWord] = useState<string>("");
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     const word = await fetchWord();
     setTargetWord(word);
-  };
+  }, []);
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (!targetWord) fetchData();
+  }, [targetWord, fetchData]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -71,16 +73,35 @@ const App: React.FC = () => {
     }
   };
 
+  const { i18n } = useTranslation();
+
+  const handleLanguageChange = (language: string) => {
+    i18n.changeLanguage(language);
+  };
+
+  useEffect(() => {
+    const paramLang = window.location.pathname.split("/")[1];
+    console.log(paramLang);
+    handleLanguageChange(paramLang ? paramLang : i18n.language);
+  }, []);
+
   return (
-    <div className="app">
-      <Grid guesses={guesses} feedback={feedback} currentGuess={currentGuess} />
-      <Keyboard
-        onLetter={handleLetterInput}
-        onBackspace={handleBackspace}
-        onEnter={handleEnter}
-      />
-      {gameState !== "in-progress" && <Modal gameState={gameState} />}
-    </div>
+    <Suspense fallback={<Loading />}>
+      <div className="app">
+        <Grid
+          guesses={guesses}
+          feedback={feedback}
+          currentGuess={currentGuess}
+        />
+        <Keyboard
+          onLetter={handleLetterInput}
+          onBackspace={handleBackspace}
+          onEnter={handleEnter}
+        />
+
+        <Modal gameState={"win"} />
+      </div>
+    </Suspense>
   );
 };
 

@@ -1,24 +1,30 @@
 import React from "react";
 import "./Modal.css";
+import { useTranslation } from "react-i18next";
+import monkeyIcon from "../assets/icons/monkey.svg";
+import trophyIcon from "../assets/icons/trophy.svg";
 
 interface ModalProps {
   gameState: "win" | "loss";
 }
 
 const Modal: React.FC<ModalProps> = ({ gameState }) => {
+  const { t } = useTranslation();
+
   const message =
     gameState === "win" ? (
       <>
-        <div className="icon">🏆</div>
-        <h2>You're a Winner, Champ!</h2>
+        <img className="icon" src={trophyIcon} />
+        <h2>{t("modal.winner_title")}</h2>
         <p>
           Congrats! You've just crushed it and won the game. Now, bask in your
-          glory and celebrate like a boss!
+          glory and celebrate like a boss!{" "}
+          <img className="icon-s" src={trophyIcon} />
         </p>
       </>
     ) : (
       <>
-        <div className="icon">🙈</div>
+        <img className="icon" src={trophyIcon} />
         <h2>Oops! Tough Luck, But Don't Give Up!</h2>
         <p>
           You didn't quite make it this time, but hey, no worries! Give it

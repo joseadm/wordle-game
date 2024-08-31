@@ -1,6 +1,6 @@
 // components/Grid.tsx
-import React from 'react';
-import './Grid.css';
+import React from "react";
+import "./Grid.css";
 
 interface GridProps {
   guesses: string[];
@@ -10,7 +10,8 @@ interface GridProps {
 
 const Grid: React.FC<GridProps> = ({ guesses, feedback, currentGuess }) => {
   const renderRow = (rowIndex: number) => {
-    const guess = rowIndex === guesses.length ? currentGuess : guesses[rowIndex] || '';
+    const guess =
+      rowIndex === guesses.length ? currentGuess : guesses[rowIndex] || "";
     const rowFeedback = feedback[rowIndex] || [];
 
     return (
@@ -18,9 +19,9 @@ const Grid: React.FC<GridProps> = ({ guesses, feedback, currentGuess }) => {
         {Array.from({ length: 5 }).map((_, colIndex) => (
           <div
             key={colIndex}
-            className={`grid-cell ${rowFeedback[colIndex] || ''}`}
+            className={`grid-cell ${rowFeedback[colIndex] || ""}`}
           >
-            {guess[colIndex] || ''}
+            {guess[colIndex] || ""}
           </div>
         ))}
       </div>

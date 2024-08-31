@@ -1,6 +1,6 @@
 // components/Keyboard.tsx
-import React from 'react';
-import './Keyboard.css';
+import React from "react";
+import "./Keyboard.css";
 
 interface KeyboardProps {
   onLetter: (letter: string) => void;
@@ -9,15 +9,19 @@ interface KeyboardProps {
 }
 
 const keys = [
-  ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
-  ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
-  ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
+  ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+  ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
+  ["Z", "X", "C", "V", "B", "N", "M"],
 ];
 
-const Keyboard: React.FC<KeyboardProps> = ({ onLetter, onBackspace, onEnter }) => {
+const Keyboard: React.FC<KeyboardProps> = ({
+  onLetter,
+  onBackspace,
+  onEnter,
+}) => {
   const handleKeyClick = (key: string) => {
-    if (key === 'Enter') onEnter();
-    else if (key === 'Backspace') onBackspace();
+    if (key === "Enter") onEnter();
+    else if (key === "Backspace") onBackspace();
     else onLetter(key);
   };
 
@@ -37,8 +41,18 @@ const Keyboard: React.FC<KeyboardProps> = ({ onLetter, onBackspace, onEnter }) =
         </div>
       ))}
       <div className="keyboard-row">
-        <button onClick={() => handleKeyClick('Enter')} className="keyboard-key enter-key">Enter</button>
-        <button onClick={() => handleKeyClick('Backspace')} className="keyboard-key backspace-key">Backspace</button>
+        <button
+          onClick={() => handleKeyClick("Enter")}
+          className="keyboard-key enter-key"
+        >
+          Enter
+        </button>
+        <button
+          onClick={() => handleKeyClick("Backspace")}
+          className="keyboard-key backspace-key"
+        >
+          Backspace
+        </button>
       </div>
     </div>
   );
