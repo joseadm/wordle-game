@@ -12,8 +12,5 @@ i18n
       order: ["cookie", "localStorage", "htmlTag", "path", "subdomain"],
       caches: ["cookie"],
     },
-       // Enables useful output in the browser’s
-    // dev console.
-    debug: true,
   });
 export default i18n;

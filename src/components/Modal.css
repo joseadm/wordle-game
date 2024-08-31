@@ -6,10 +6,17 @@
   background-color: #1c1c1e;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
   width: 260px;
-  height: 266px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
   text-align: center;
+}
+
+.win {
+  height: 252px;
+}
+
+.loss {
+  height: 266px;
 }
 
 .modal-content {
@@ -27,16 +34,18 @@ h2 {
 p {
   font-size: 11px;
   line-height: 14px;
+  width: 228px;
   color: #c0c0c0;
-  margin-bottom: 20px;
 }
 
 .icon {
   height: 64px;
   width: 64px;
+  padding: 12px;
 }
 
 .icon-s {
+  margin-left: 4px;
   height: 11px;
   width: 11px;
 }
@@ -45,7 +54,7 @@ p {
   padding: 10px 20px;
   font-size: 16px;
   color: #ffffff;
-  background-color: #007bff;
+  background-color: #007aff;
   border: none;
   border-radius: 8px;
   cursor: pointer;

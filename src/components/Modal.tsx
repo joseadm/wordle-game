@@ -3,6 +3,9 @@ import "./Modal.css";
 import { useTranslation } from "react-i18next";
 import monkeyIcon from "../assets/icons/monkey.svg";
 import trophyIcon from "../assets/icons/trophy.svg";
+import muscleIcon from "../assets/icons/muscle.svg";
+import gameIcon from "../assets/icons/game.svg";
+import celebrateIcon from "../assets/icons/celebrate.svg";
 
 interface ModalProps {
   gameState: "win" | "loss";
@@ -15,27 +18,26 @@ const Modal: React.FC<ModalProps> = ({ gameState }) => {
     gameState === "win" ? (
       <>
         <img className="icon" src={trophyIcon} />
-        <h2>{t("modal.winner_title")}</h2>
+        <h2>{t("modal.win_title")}</h2>
         <p>
-          Congrats! You've just crushed it and won the game. Now, bask in your
-          glory and celebrate like a boss!{" "}
-          <img className="icon-s" src={trophyIcon} />
+          {t("modal.win_body")}
+          <img className="icon-s" src={celebrateIcon} />
         </p>
       </>
     ) : (
       <>
-        <img className="icon" src={trophyIcon} />
-        <h2>Oops! Tough Luck, But Don't Give Up!</h2>
+        <img className="icon" src={monkeyIcon} />
+        <h2>{t("modal.loss_title")}</h2>
         <p>
-          You didn't quite make it this time, but hey, no worries! Give it
-          another shot, and who knows, the next round might be your moment of
-          glory! Keep going, champ! 💪🎮
+          {t("modal.loss_body")}
+          <img className="icon-s" src={muscleIcon} />
+          <img className="icon-s" src={gameIcon} />
         </p>
       </>
     );
 
   return (
-    <div className="modal">
+    <div className={`modal ${gameState}`}>
       <div className="modal-content">
         <h2>{message}</h2>
         <button

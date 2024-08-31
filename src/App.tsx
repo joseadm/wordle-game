@@ -56,21 +56,32 @@ const App: React.FC = () => {
       setCurrentGuess((prev) => prev.slice(0, -1));
     }
   };
-
-  const handleEnter = () => {
+  const handleEnter = async () => {
     if (currentGuess.length === 5 && gameState === "in-progress") {
       const currentFeedback = validateWord(currentGuess, targetWord);
-      setGuesses([...guesses, currentGuess]);
-      setFeedback([...feedback, currentFeedback]);
+      const isValidWord = await checkDictionary(currentGuess); // Add this line
 
-      if (currentGuess.toLocaleLowerCase() === targetWord) {
-        setGameState("win");
-      } else if (guesses.length === 4) {
-        setGameState("loss");
+      if (isValidWord) {
+        setGuesses([...guesses, currentGuess]);
+        setFeedback([...feedback, currentFeedback]);
+
+        if (currentGuess.toLocaleLowerCase() === targetWord) {
+          setGameState("win");
+        } else if (guesses.length === 4) {
+          setGameState("loss");
+        }
+
+        setCurrentGuess("");
+      } else {
+        // Handle invalid word
       }
-
-      setCurrentGuess("");
     }
+  };
+
+  const checkDictionary = async (word: string): Promise<boolean> => {
+    const response = await fetch(`https://api.dictionary.com/api/v3/references/collegiate/json/${word}`);
+    const data = await response.json();
+    return Array.isArray(data) && data.length > 0;
   };
 
   const { i18n } = useTranslation();
@@ -99,7 +110,7 @@ const App: React.FC = () => {
           onEnter={handleEnter}
         />
 
-        <Modal gameState={"win"} />
+        {gameState !== "in-progress" && <Modal gameState={gameState} />}
       </div>
     </Suspense>
   );

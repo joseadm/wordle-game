@@ -1,6 +1,8 @@
 {
   "modal": {
-    "winner_title": "Eres un ganador, Campeon!",
-    "winner_body": "Felicitaciones! Lo acabas de aplastar y ganaste el juego. Ahora, disfruta de tu gloria y celebra como un jefe!"
+    "win_title": "¡Eres un ganador, campeón!",
+    "win_body": "¡Felicidades! Acabas de arrasar y ganar el juego. Ahora, disfruta de tu gloria y celebra como un jefe.",
+    "loss_title": "¡Oops! ¡Mala suerte, pero no te rindas!",
+    "loss_body": "No lo lograste esta vez, ¡pero hey, no te preocupes! Inténtalo de nuevo y quién sabe, ¡la próxima ronda podría ser tu momento de gloria! ¡Sigue adelante, campeón!"
   }
 }
