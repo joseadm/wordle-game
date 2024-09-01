@@ -1,6 +1,6 @@
 # Wordle Frontend Assignment
 
-[![CircleCI](https://dl.circleci.com/status-badge/img/circleci/PBNkJmFSt4Z6AqdiAMnsg6/9erJhWPyb6EvME2NnoBZeN/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/circleci/PBNkJmFSt4Z6AqdiAMnsg6/9erJhWPyb6EvME2NnoBZeN/tree/main)
+[![CircleCI](https://dl.circleci.com/status-badge/img/circleci/PBNkJmFSt4Z6AqdiAMnsg6/9erJhWPyb6EvME2NnoBZeN/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/circleci/PBNkJmFSt4Z6AqdiAMnsg6/9erJhWPyb6EvME2NnoBZeN/tree/master)
 
 Wordle is a word-guessing game where the user is tasked with guessing a word within a maximum of 5 tries. Each word contains exactly 5 letters. Feedback will be given on each guess to help guide the user to the correct answer.
 
