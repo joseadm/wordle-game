@@ -6,16 +6,18 @@ import trophyIcon from "../assets/icons/trophy.svg";
 import muscleIcon from "../assets/icons/muscle.svg";
 import gameIcon from "../assets/icons/game.svg";
 import celebrateIcon from "../assets/icons/celebrate.svg";
+import { GameStatus } from "../types";
+import { GAME_STATE } from "../constants";
 
 interface ModalProps {
-  gameState: "win" | "loss";
+  gameState: GameStatus;
 }
 
 const Modal: React.FC<ModalProps> = ({ gameState }) => {
   const { t } = useTranslation();
 
   const message =
-    gameState === "win" ? (
+    gameState === GAME_STATE.WIN ? (
       <div data-testid="modal-win">
         <img className="icon" src={trophyIcon} alt="trophy" />
         <h2>{t("modal.win_title")}</h2>

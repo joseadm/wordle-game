@@ -6,13 +6,20 @@ import { validateWord } from "./components/utils/validateWord";
 import { fetchWord } from "./api";
 import Loading from "./Loading";
 import { useTranslation } from "react-i18next";
+import { GameStatus } from "./types";
+import {
+  EVENT_KEY_BACKSPACE,
+  EVENT_KEY_ENTER,
+  GAME_STATE,
+  WORD_SIZE,
+} from "./constants";
 
 const App: React.FC = () => {
   const [guesses, setGuesses] = useState<string[]>([]);
   const [feedback, setFeedback] = useState<string[][]>([]);
   const [currentGuess, setCurrentGuess] = useState<string>("");
-  const [gameState, setGameState] = useState<"win" | "loss" | "in-progress">(
-    "in-progress"
+  const [gameState, setGameState] = useState<GameStatus>(
+    GAME_STATE.IN_PROGRESS as GameStatus
   );
   const [targetWord, setTargetWord] = useState<string>("");
   const { i18n } = useTranslation();
@@ -27,27 +34,30 @@ const App: React.FC = () => {
   }, []);
 
   const handleLetterInput = (letter: string) => {
-    if (currentGuess.length < 5 && gameState === "in-progress") {
+    if (currentGuess.length < 5 && gameState === GAME_STATE.IN_PROGRESS) {
       setCurrentGuess((prev) => prev + letter);
     }
   };
 
   const handleBackspace = () => {
-    if (gameState === "in-progress") {
+    if (gameState === GAME_STATE.IN_PROGRESS) {
       setCurrentGuess((prev) => prev.slice(0, -1));
     }
   };
 
   const handleEnter = () => {
-    if (currentGuess.length === 5 && gameState === "in-progress") {
+    if (
+      currentGuess.length === WORD_SIZE &&
+      gameState === GAME_STATE.IN_PROGRESS
+    ) {
       const currentFeedback = validateWord(currentGuess, targetWord);
       setGuesses([...guesses, currentGuess]);
       setFeedback([...feedback, currentFeedback]);
 
       if (currentGuess.toLocaleLowerCase() === targetWord) {
-        setGameState("win");
+        setGameState(GAME_STATE.WIN as GameStatus);
       } else if (guesses.length === 4) {
-        setGameState("loss");
+        setGameState(GAME_STATE.LOSS as GameStatus);
       }
 
       setCurrentGuess("");
@@ -60,11 +70,11 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (gameState !== "in-progress") return;
+      if (gameState !== GAME_STATE.IN_PROGRESS) return;
 
-      if (event.key === "Enter") {
+      if (event.key === EVENT_KEY_ENTER) {
         handleEnter();
-      } else if (event.key === "Backspace") {
+      } else if (event.key === EVENT_KEY_BACKSPACE) {
         handleBackspace();
       } else if (/^[a-zA-Z]$/.test(event.key)) {
         handleLetterInput(event.key.toUpperCase());
@@ -97,7 +107,9 @@ const App: React.FC = () => {
           onEnter={handleEnter}
         />
 
-        {gameState !== "in-progress" && <Modal gameState={gameState} />}
+        {gameState !== GAME_STATE.IN_PROGRESS && (
+          <Modal gameState={gameState} />
+        )}
       </div>
     </Suspense>
   );
