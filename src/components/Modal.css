@@ -3,7 +3,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #1c1c1e;
+  background-color: var(--modal-bg-color);
   padding: 20px;
   border-radius: 12px;
   width: 260px;
@@ -27,7 +27,7 @@
 
 h2 {
   font-size: 13px;
-  color: #ffffff;
+  color: var(--base-text-color);
   margin-bottom: 15px;
 }
 
@@ -35,7 +35,7 @@ p {
   font-size: 11px;
   line-height: 14px;
   width: 228px;
-  color: #c0c0c0;
+  color: var(--modal-text-color);
 }
 
 .icon {
@@ -53,8 +53,8 @@ p {
 .modal-button {
   padding: 10px 20px;
   font-size: 16px;
-  color: #ffffff;
-  background-color: #007aff;
+  color: var(--base-text-color);
+  background-color: var(--button-bg-color);
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -63,5 +63,5 @@ p {
 }
 
 .modal-button:hover {
-  background-color: #0056b3;
+  background-color: var(--button-hover-color);
 }

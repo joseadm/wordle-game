@@ -11,9 +11,9 @@ test("renders the correct guess in each cell", () => {
   ];
   const currentGuess = "JKL";
 
-const { getAllByTestId } = render(
+  const { getAllByTestId } = render(
     <Grid guesses={guesses} feedback={feedback} currentGuess={currentGuess} />
-);
+  );
 
   const cells = getAllByTestId("grid-cell");
   cells.forEach((cell, index) => {

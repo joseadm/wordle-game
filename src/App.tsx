@@ -6,6 +6,7 @@ import Loading from "./Loading";
 import { useTranslation } from "react-i18next";
 import { GAME_STATE } from "./constants";
 import { useGameLogic } from "./hooks/useGameLogic";
+import "./App.css";
 
 const App: React.FC = () => {
   const { i18n } = useTranslation();
@@ -21,7 +22,7 @@ const App: React.FC = () => {
     feedback,
     error,
     currentGuess,
-    keys,
+    keysStatus,
     handleLetterInput,
     handleBackspace,
     handleEnter,
@@ -34,23 +35,25 @@ const App: React.FC = () => {
 
   return (
     <Suspense fallback={<Loading />}>
-      <div className="app" data-testid="app">
-        <Grid
-          guesses={guesses}
-          feedback={feedback}
-          currentGuess={currentGuess}
-        />
-        <Keyboard
-          keysStatus={keys}
-          onLetter={handleLetterInput}
-          onBackspace={handleBackspace}
-          onEnter={handleEnter}
-        />
+      <main className="app" data-testid="app">
+        <div className="container">
+          <Grid
+            guesses={guesses}
+            feedback={feedback}
+            currentGuess={currentGuess}
+          />
+          <Keyboard
+            keysStatus={keysStatus}
+            onLetter={handleLetterInput}
+            onBackspace={handleBackspace}
+            onEnter={handleEnter}
+          />
 
-        {gameState !== GAME_STATE.IN_PROGRESS && (
-          <Modal gameState={gameState} resetGame={resetGame} />
-        )}
-      </div>
+          {gameState !== GAME_STATE.IN_PROGRESS && (
+            <Modal gameState={gameState} resetGame={resetGame} />
+          )}
+        </div>
+      </main>
     </Suspense>
   );
 };

@@ -4,7 +4,7 @@ import "./Keyboard.css";
 import { useTranslation } from "react-i18next";
 
 interface KeyboardProps {
-  keysStatus: any;
+  keysStatus: Record<string, string>;
   onLetter: (letter: string) => void;
   onBackspace: () => void;
   onEnter: () => void;
@@ -31,37 +31,40 @@ const Keyboard: React.FC<KeyboardProps> = ({
   };
 
   return (
-    <div className="keyboard">
-      {keys.map((row, rowIndex) => (
-        <div key={rowIndex} className="keyboard-row">
-          {row.map((key) => (
-            <button
-              key={key}
-              onClick={() => handleKeyClick(key)}
-              className={
-                "keyboard-key " + keysStatus[key.toLocaleUpperCase()] || ""
-              }
-            >
-              {key}
-            </button>
-          ))}
+    <div className="keyboard-container">
+      <div className="keyboard">
+        {keys.map((row, rowIndex) => (
+          <div key={rowIndex} className="keyboard-row">
+            {row.map((key) => (
+              <button
+                key={key}
+                data-testid={`${key}-key`}
+                onClick={() => handleKeyClick(key)}
+                className={`keyboard-key ${
+                  keysStatus[key.toLocaleUpperCase()] || ""
+                }`}
+              >
+                {key}
+              </button>
+            ))}
+          </div>
+        ))}
+        <div className="keyboard-row">
+          <button
+            data-testid="enter-button"
+            onClick={() => handleKeyClick("Enter")}
+            className="keyboard-key enter-key"
+          >
+            {t("keyboard.enter_button")}
+          </button>
+          <button
+            data-testid="backspace-button"
+            onClick={() => handleKeyClick("Backspace")}
+            className="keyboard-key backspace-key"
+          >
+            {t("keyboard.backspace_button")}
+          </button>
         </div>
-      ))}
-      <div className="keyboard-row">
-        <button
-          data-testid="enter-button"
-          onClick={() => handleKeyClick("Enter")}
-          className="keyboard-key enter-key"
-        >
-          {t("keyboard.enter_button")}
-        </button>
-        <button
-          data-testid="backspace-button"
-          onClick={() => handleKeyClick("Backspace")}
-          className="keyboard-key backspace-key"
-        >
-          {t("keyboard.backspace_button")}
-        </button>
       </div>
     </div>
   );

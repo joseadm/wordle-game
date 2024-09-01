@@ -1,14 +1,18 @@
 import { useCallback, useEffect, useState } from "react";
 import {
-  CELL_COLOR,
   EVENT_KEY_BACKSPACE,
+  EVENT_KEY_DOWN,
   EVENT_KEY_ENTER,
   GAME_STATE,
+  LETTER_REGEX,
   WORD_SIZE,
 } from "../constants";
 import { GameStatus } from "../types";
 import { fetchWord } from "../api";
 import { validateWord } from "../components/utils/validateWord";
+import { updateKeysStatus } from "./utils";
+import { useTranslation } from "react-i18next";
+import i18n from "../i18n";
 
 interface GameState {
   gameState: GameStatus;
@@ -16,7 +20,7 @@ interface GameState {
   feedback: string[][];
   currentGuess: string;
   error: Error | null;
-  keys: any;
+  keysStatus: Record<string, string>;
   handleLetterInput: (letter: string) => void;
   handleBackspace: () => void;
   handleEnter: () => void;
@@ -27,17 +31,18 @@ interface GameState {
 export const useGameLogic = (): GameState => {
   const [guesses, setGuesses] = useState<string[]>([]);
   const [feedback, setFeedback] = useState<string[][]>([]);
-  const [keys, setKeys] = useState<any>({});
+  const [keysStatus, setKeysStatus] = useState<Record<string, string>>({});
   const [currentGuess, setCurrentGuess] = useState<string>("");
   const [gameState, setGameState] = useState<GameStatus>(
-    GAME_STATE.IN_PROGRESS as GameStatus
+    GAME_STATE.IN_PROGRESS
   );
+  const { i18n } = useTranslation();
   const [targetWord, setTargetWord] = useState<string>("");
   const [error, setError] = useState<Error | null>(null as Error | null);
 
   const fetchData = useCallback(async () => {
     try {
-      const response = await fetchWord();
+      const response = await fetchWord(WORD_SIZE, i18n.language);
       setTargetWord(response);
     } catch (error) {
       setError(error as Error);
@@ -47,7 +52,7 @@ export const useGameLogic = (): GameState => {
   const resetGame = () => {
     setGuesses([]);
     setFeedback([]);
-    setKeys({});
+    setKeysStatus({});
     setCurrentGuess("");
     setGameState(GAME_STATE.IN_PROGRESS as GameStatus);
     setTargetWord("");
@@ -68,26 +73,6 @@ export const useGameLogic = (): GameState => {
     }
   };
 
-  const generateBestGuess = (guesses: string[], feedback: string[][]) => {
-    const result = {} as any;
-    guesses.forEach((guess, index) => {
-      guess.split("").forEach((letter, letterIndex) => {
-        if (result[letter] === CELL_COLOR.GREEN) return;
-        if (feedback[index][letterIndex] === CELL_COLOR.GREEN) {
-          result[letter] = CELL_COLOR.GREEN;
-          return;
-        }
-        if (result[letter] === CELL_COLOR.ORANGE) return;
-        if (feedback[index][letterIndex] === CELL_COLOR.ORANGE) {
-          result[letter] = CELL_COLOR.ORANGE;
-          return;
-        }
-        result[letter] = CELL_COLOR.NO_COLOR;
-      });
-    });
-    return result;
-  };
-
   const handleEnter = () => {
     if (
       currentGuess.length === WORD_SIZE &&
@@ -96,16 +81,13 @@ export const useGameLogic = (): GameState => {
       const currentFeedback = validateWord(currentGuess, targetWord);
       setGuesses([...guesses, currentGuess]);
       setFeedback([...feedback, currentFeedback]);
-      setKeys(
-        generateBestGuess(
-          [...guesses, currentGuess],
-          [...feedback, currentFeedback]
-        )
+      setKeysStatus(
+        updateKeysStatus(currentGuess, currentFeedback, keysStatus)
       );
       if (currentGuess.toLocaleLowerCase() === targetWord) {
-        setGameState(GAME_STATE.WIN as GameStatus);
+        setGameState(GAME_STATE.WIN);
       } else if (guesses.length === 4) {
-        setGameState(GAME_STATE.LOSS as GameStatus);
+        setGameState(GAME_STATE.LOSS);
       }
 
       setCurrentGuess("");
@@ -116,25 +98,23 @@ export const useGameLogic = (): GameState => {
     if (!targetWord) fetchData();
   }, [targetWord, fetchData]);
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent) => {
       if (gameState !== GAME_STATE.IN_PROGRESS) return;
-
-      if (event.key === EVENT_KEY_ENTER) {
-        handleEnter();
-      } else if (event.key === EVENT_KEY_BACKSPACE) {
-        handleBackspace();
-      } else if (/^[a-zA-Z]$/.test(event.key)) {
+      if (event.key === EVENT_KEY_ENTER) handleEnter();
+      if (event.key === EVENT_KEY_BACKSPACE) handleBackspace();
+      if (LETTER_REGEX.test(event.key))
         handleLetterInput(event.key.toUpperCase());
-      }
-    };
+    },
+    [gameState, handleEnter, handleBackspace, handleLetterInput]
+  );
 
-    window.addEventListener("keydown", handleKeyDown);
-
+  useEffect(() => {
+    window.addEventListener(EVENT_KEY_DOWN, handleKeyDown);
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener(EVENT_KEY_DOWN, handleKeyDown);
     };
-  }, [currentGuess, gameState]);
+  }, [handleKeyDown]);
 
   return {
     gameState,
@@ -142,7 +122,7 @@ export const useGameLogic = (): GameState => {
     feedback,
     currentGuess,
     error,
-    keys,
+    keysStatus,
     handleLetterInput,
     handleBackspace,
     handleEnter,

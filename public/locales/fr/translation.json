@@ -1,0 +1,13 @@
+{
+  "modal": {
+    "win_title": "Vous êtes un gagnant, champion !",
+    "win_body": "Félicitations ! Vous venez de tout écraser et de remporter la partie. Maintenant, profitez de votre gloire et célébrez comme un boss !",
+    "loss_title": "Oops ! Pas de chance, mais ne vous découragez pas !",
+    "loss_body": "Vous n'avez pas tout à fait réussi cette fois-ci, mais hey, pas de soucis ! Essayez encore une fois, et qui sait, la prochaine manche pourrait être votre moment de gloire ! Continuez, champion !",
+    "try_again_button": "Réessayer"
+  },
+  "keyboard": {
+    "enter_button": "Entrée",
+    "backspace_button": "Retour"
+  }
+}

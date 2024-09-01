@@ -31,10 +31,12 @@ const Grid: React.FC<GridProps> = ({ guesses, feedback, currentGuess }) => {
   };
 
   return (
-    <div className="grid">
-      {Array.from({ length: WORD_SIZE }).map((_, rowIndex) =>
-        renderRow(rowIndex)
-      )}
+    <div className="grid-container">
+      <div className="grid">
+        {Array.from({ length: WORD_SIZE }).map((_, rowIndex) =>
+          renderRow(rowIndex)
+        )}
+      </div>
     </div>
   );
 };

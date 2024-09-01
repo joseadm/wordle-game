@@ -1,0 +1,13 @@
+{
+    "modal": {
+      "win_title": "Sei un vincitore, campione!",
+      "win_body": "Congratulazioni! Hai appena schiacciato tutto e vinto il gioco. Ora goditi la tua gloria e festeggia come un boss!",
+      "loss_title": "Oops! Sfortunatamente, non hai avuto fortuna, ma non scoraggiarti!",
+      "loss_body": "Questa volta non hai avuto successo, ma hey, non preoccuparti! Riprova ancora una volta e chissà, la prossima partita potrebbe essere il tuo momento di gloria! Continua, campione!",
+      "try_again_button": "Riprova"
+    },
+    "keyboard": {
+      "enter_button": "Invio",
+      "backspace_button": "Indietro"
+    }
+}

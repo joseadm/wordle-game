@@ -40,10 +40,20 @@ const Modal: React.FC<ModalProps> = ({ gameState, resetGame }) => {
     );
 
   return (
-    <div className={`modal ${gameState}`}>
+    <div
+      className={`modal ${gameState}`}
+      role="dialog"
+      aria-modal="true"
+      tabIndex={0}
+    >
       <div className="modal-content">
         <h2>{message}</h2>
-        <button onClick={resetGame} className="modal-button">
+        <button
+          onClick={resetGame}
+          className="modal-button"
+          data-testid="modal-button"
+          tabIndex={0}
+        >
           {t("modal.try_again_button")}
         </button>
       </div>

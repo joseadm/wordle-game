@@ -2,8 +2,19 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import Modal from "./Modal";
 
+jest.mock("react-i18next", () => ({
+  useTranslation: () => {
+    return {
+      t: (str: string) => str,
+      i18n: {
+        changeLanguage: () => new Promise(() => {}),
+      },
+    };
+  },
+}));
+
 describe("Modal component", () => {
-  test("renders win message correctly", () => {
+  it("renders win message correctly", () => {
     render(<Modal gameState="win" resetGame={() => {}} />);
 
     const modalWinContent = screen.getByTestId("modal-win");
@@ -22,7 +33,7 @@ describe("Modal component", () => {
     expect(bodyElement?.textContent).toBe("modal.win_body");
   });
 
-  test("renders loss message correctly", () => {
+  it("renders loss message correctly", () => {
     render(<Modal gameState="loss" resetGame={() => {}} />);
 
     const modalLossContent = screen.getByTestId("modal-loss");
