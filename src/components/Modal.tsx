@@ -11,9 +11,10 @@ import { GAME_STATE } from "../constants";
 
 interface ModalProps {
   gameState: GameStatus;
+  resetGame: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ gameState }) => {
+const Modal: React.FC<ModalProps> = ({ gameState, resetGame }) => {
   const { t } = useTranslation();
 
   const message =
@@ -42,10 +43,7 @@ const Modal: React.FC<ModalProps> = ({ gameState }) => {
     <div className={`modal ${gameState}`}>
       <div className="modal-content">
         <h2>{message}</h2>
-        <button
-          onClick={() => window.location.reload()}
-          className="modal-button"
-        >
+        <button onClick={resetGame} className="modal-button">
           {t("modal.try_again_button")}
         </button>
       </div>

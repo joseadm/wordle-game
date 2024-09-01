@@ -1,19 +1,26 @@
+import { CELL_COLOR } from "../../constants";
+
 // utils/validateWord.ts
 export const validateWord = (guess: string, target: string): string[] => {
-  const feedback = Array(5).fill("");
-  const targetLetters = target.split("");
-  const guessLetters = guess.split("");
+  const targetLetters = target.toLocaleLowerCase().split("");
+  const guessLetters = guess.toLocaleLowerCase().split("");
+
+  const feedback: Array<string> = guessLetters.map((letter, index) => {
+    if (letter === target[index]) {
+      targetLetters[index] = ""; // Mark this letter as used
+      return CELL_COLOR.GREEN;
+    }
+    return "";
+  });
 
   guessLetters.forEach((letter, index) => {
-    if (letter.toLocaleLowerCase() === target[index]) {
-      feedback[index] = "green";
-      targetLetters[index] = ""; // Mark this letter as used
-    } else if (targetLetters.includes(letter.toLocaleLowerCase())) {
-      feedback[index] = "orange";
-      const targetIndex = targetLetters.indexOf(letter.toLocaleLowerCase());
+    if (feedback[index]) return; // Skip already matched letters
+    if (targetLetters.includes(letter)) {
+      feedback[index] = CELL_COLOR.ORANGE;
+      const targetIndex = targetLetters.indexOf(letter);
       targetLetters[targetIndex] = ""; // Mark this letter as used
     } else {
-      feedback[index] = "no-color";
+      feedback[index] = CELL_COLOR.NO_COLOR;
     }
   });
 

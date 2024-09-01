@@ -8,6 +8,7 @@ test("calls onLetter callback when a letter key is clicked", () => {
 
   const { getByText } = render(
     <Keyboard
+      keysStatus={{}}
       onLetter={onLetterMock}
       onBackspace={onBackspaceMock}
       onEnter={onEnterMock}
@@ -29,6 +30,7 @@ test("calls onBackspace callback when the backspace key is clicked", () => {
 
   render(
     <Keyboard
+      keysStatus={{}}
       onLetter={onLetterMock}
       onBackspace={onBackspaceMock}
       onEnter={onEnterMock}
@@ -50,6 +52,7 @@ test("calls onEnter callback when the enter key is clicked", () => {
 
   render(
     <Keyboard
+      keysStatus={{}}
       onLetter={onLetterMock}
       onBackspace={onBackspaceMock}
       onEnter={onEnterMock}

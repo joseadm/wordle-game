@@ -4,7 +4,7 @@ import Modal from "./Modal";
 
 describe("Modal component", () => {
   test("renders win message correctly", () => {
-    render(<Modal gameState="win" />);
+    render(<Modal gameState="win" resetGame={() => {}} />);
 
     const modalWinContent = screen.getByTestId("modal-win");
 
@@ -23,7 +23,7 @@ describe("Modal component", () => {
   });
 
   test("renders loss message correctly", () => {
-    render(<Modal gameState="loss" />);
+    render(<Modal gameState="loss" resetGame={() => {}} />);
 
     const modalLossContent = screen.getByTestId("modal-loss");
 

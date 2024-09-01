@@ -4,6 +4,7 @@ import "./Keyboard.css";
 import { useTranslation } from "react-i18next";
 
 interface KeyboardProps {
+  keysStatus: any;
   onLetter: (letter: string) => void;
   onBackspace: () => void;
   onEnter: () => void;
@@ -16,6 +17,7 @@ const keys = [
 ];
 
 const Keyboard: React.FC<KeyboardProps> = ({
+  keysStatus,
   onLetter,
   onBackspace,
   onEnter,
@@ -36,7 +38,9 @@ const Keyboard: React.FC<KeyboardProps> = ({
             <button
               key={key}
               onClick={() => handleKeyClick(key)}
-              className="keyboard-key"
+              className={
+                "keyboard-key " + keysStatus[key.toLocaleUpperCase()] || ""
+              }
             >
               {key}
             </button>
