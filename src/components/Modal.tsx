@@ -17,21 +17,21 @@ const Modal: React.FC<ModalProps> = ({ gameState }) => {
   const message =
     gameState === "win" ? (
       <div data-testid="modal-win">
-        <img className="icon" src={trophyIcon} />
+        <img className="icon" src={trophyIcon} alt="trophy" />
         <h2>{t("modal.win_title")}</h2>
         <p>
           {t("modal.win_body")}
-          <img className="icon-s" src={celebrateIcon} />
+          <img className="icon-s" src={celebrateIcon} alt="celebrate" />
         </p>
       </div>
     ) : (
       <div data-testid="modal-loss">
-        <img className="icon" src={monkeyIcon} />
+        <img className="icon" src={monkeyIcon} alt="monkey" />
         <h2>{t("modal.loss_title")}</h2>
         <p>
           {t("modal.loss_body")}
-          <img className="icon-s" src={muscleIcon} />
-          <img className="icon-s" src={gameIcon} />
+          <img className="icon-s" src={muscleIcon} alt="muscle" />
+          <img className="icon-s" src={gameIcon} alt="game" />
         </p>
       </div>
     );
