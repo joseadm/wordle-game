@@ -16,16 +16,16 @@ const Modal: React.FC<ModalProps> = ({ gameState }) => {
 
   const message =
     gameState === "win" ? (
-      <>
+      <div data-testid="modal-win">
         <img className="icon" src={trophyIcon} />
         <h2>{t("modal.win_title")}</h2>
         <p>
           {t("modal.win_body")}
           <img className="icon-s" src={celebrateIcon} />
         </p>
-      </>
+      </div>
     ) : (
-      <>
+      <div data-testid="modal-loss">
         <img className="icon" src={monkeyIcon} />
         <h2>{t("modal.loss_title")}</h2>
         <p>
@@ -33,7 +33,7 @@ const Modal: React.FC<ModalProps> = ({ gameState }) => {
           <img className="icon-s" src={muscleIcon} />
           <img className="icon-s" src={gameIcon} />
         </p>
-      </>
+      </div>
     );
 
   return (
@@ -44,7 +44,7 @@ const Modal: React.FC<ModalProps> = ({ gameState }) => {
           onClick={() => window.location.reload()}
           className="modal-button"
         >
-          Try Again
+          {t("modal.try_again_button")}
         </button>
       </div>
     </div>

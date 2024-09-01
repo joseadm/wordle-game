@@ -3,6 +3,11 @@
     "win_title": "Du bist ein Gewinner, Champ!",
     "win_body": "Herzlichen Glückwunsch! Du hast es geschafft und das Spiel gewonnen. Jetzt genieße deinen Ruhm und feiere wie ein Boss!",
     "loss_title": "Oops! Pech gehabt, aber gib nicht auf!",
-    "loss_body": "Dieses Mal hat es nicht ganz geklappt, aber hey, kein Problem! Versuch es nochmal und wer weiß, vielleicht ist die nächste Runde dein großer Moment! Weiter so, Champ!"
+    "loss_body": "Dieses Mal hat es nicht ganz geklappt, aber hey, kein Problem! Versuch es nochmal und wer weiß, vielleicht ist die nächste Runde dein großer Moment! Weiter so, Champ!",
+    "try_again_button": "Nochmal versuchen"
+  },
+  "keyboard": {
+    "enter_button": "Eingabe",
+    "backspace_button": "Rücktaste"
   }
 }

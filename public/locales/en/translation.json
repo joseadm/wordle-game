@@ -3,6 +3,11 @@
     "win_title": "You're a Winner, Champ!",
     "win_body": "Congrats! You've just crushed it and won the game. Now, bask in your glory and celebrate like a boss!",
     "loss_title": "Oops! Tough Luck, But Don't Give Up!",
-    "loss_body": "You didn't quite make it this time, but hey, no worries! Give it another shot, and who knows, the next round might be your moment of glory! Keep going, champ!"
+    "loss_body": "You didn't quite make it this time, but hey, no worries! Give it another shot, and who knows, the next round might be your moment of glory! Keep going, champ!",
+    "try_again_button": "Try again"
+  },
+  "keyboard": {
+    "enter_button": "Enter",
+    "backspace_button": "Backspace"
   }
 }

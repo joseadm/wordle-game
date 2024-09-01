@@ -1,6 +1,7 @@
 // components/Keyboard.tsx
 import React from "react";
 import "./Keyboard.css";
+import { useTranslation } from "react-i18next";
 
 interface KeyboardProps {
   onLetter: (letter: string) => void;
@@ -19,6 +20,8 @@ const Keyboard: React.FC<KeyboardProps> = ({
   onBackspace,
   onEnter,
 }) => {
+  const { t } = useTranslation();
+
   const handleKeyClick = (key: string) => {
     if (key === "Enter") onEnter();
     else if (key === "Backspace") onBackspace();
@@ -42,16 +45,18 @@ const Keyboard: React.FC<KeyboardProps> = ({
       ))}
       <div className="keyboard-row">
         <button
+          data-testid="enter-button"
           onClick={() => handleKeyClick("Enter")}
           className="keyboard-key enter-key"
         >
-          Enter
+          {t("keyboard.enter_button")}
         </button>
         <button
+          data-testid="backspace-button"
           onClick={() => handleKeyClick("Backspace")}
           className="keyboard-key backspace-key"
         >
-          Backspace
+          {t("keyboard.backspace_button")}
         </button>
       </div>
     </div>

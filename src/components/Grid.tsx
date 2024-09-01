@@ -15,10 +15,11 @@ const Grid: React.FC<GridProps> = ({ guesses, feedback, currentGuess }) => {
     const rowFeedback = feedback[rowIndex] || [];
 
     return (
-      <div className="grid-row" key={rowIndex}>
+      <div className="grid-row" data-testid="grid-row" key={rowIndex}>
         {Array.from({ length: 5 }).map((_, colIndex) => (
           <div
             key={colIndex}
+            data-testid="grid-cell"
             className={`grid-cell ${rowFeedback[colIndex] || ""}`}
           >
             {guess[colIndex] || ""}

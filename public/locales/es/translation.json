@@ -3,6 +3,11 @@
     "win_title": "¡Eres un ganador, campeón!",
     "win_body": "¡Felicidades! Acabas de arrasar y ganar el juego. Ahora, disfruta de tu gloria y celebra como un jefe.",
     "loss_title": "¡Oops! ¡Mala suerte, pero no te rindas!",
-    "loss_body": "No lo lograste esta vez, ¡pero hey, no te preocupes! Inténtalo de nuevo y quién sabe, ¡la próxima ronda podría ser tu momento de gloria! ¡Sigue adelante, campeón!"
+    "loss_body": "No lo lograste esta vez, ¡pero hey, no te preocupes! Inténtalo de nuevo y quién sabe, ¡la próxima ronda podría ser tu momento de gloria! ¡Sigue adelante, campeón!",
+    "try_again_button": "Intentalo de nuevo"
+  },
+  "keyboard": {
+    "enter_button": "Entrar",
+    "backspace_button": "Retroceso"
   }
 }

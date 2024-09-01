@@ -1,0 +1,13 @@
+{
+  "modal": {
+    "win_title": "Je bent een winnaar, kampioen!",
+    "win_body": "Gefeliciteerd! Je hebt zojuist het spel gewonnen. Geniet nu van je glorie en vier het als een baas.",
+    "loss_title": "Oeps! Jammer, maar geef niet op!",
+    "loss_body": "Deze keer is het niet gelukt, maar hey, maak je geen zorgen! Probeer het opnieuw en wie weet, de volgende ronde kan jouw moment van glorie zijn! Ga ervoor, kampioen!",
+    "try_again_button": "Probeer opnieuw"
+  },
+  "keyboard": {
+    "enter_button": "Invoeren",
+    "backspace_button": "Terug"
+  }
+}
