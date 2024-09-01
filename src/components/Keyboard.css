@@ -16,9 +16,9 @@
   height: 40px;
   font-size: 1rem;
   font-weight: bold;
-  background-color: #3a3a3c;
+  background-color: var(--gray);
   color: white;
-  border: 2px solid #3a3a3c;
+  border: 2px solid var(--gray);
   border-radius: 5px;
   cursor: pointer;
   text-transform: uppercase;
@@ -38,19 +38,19 @@
 }
 
 body {
-  background-color: #121213;
+  background-color: var(--dark);;
   color: white;
   font-family: "Arial", sans-serif;
 }
 
 .keyboard-key.green {
-  background-color: #538d4e; /* Green background for correct letters */
+  background-color: var(--green); /* Green background for correct letters */
 }
 
 .keyboard-key.orange {
-  background-color: #b59f3b; /* Orange background for misplaced letters */
+  background-color: var(--orange); /* Orange background for misplaced letters */
 }
 
 .keyboard-key.no-color {
-  background-color: #666; /* Default background for wrong letters */
+  background-color: var(--gray); /* Default background for wrong letters */
 }

@@ -15,6 +15,7 @@ interface GameState {
   guesses: string[];
   feedback: string[][];
   currentGuess: string;
+  error: Error | null;
   keys: any;
   handleLetterInput: (letter: string) => void;
   handleBackspace: () => void;
@@ -32,10 +33,15 @@ export const useGameLogic = (): GameState => {
     GAME_STATE.IN_PROGRESS as GameStatus
   );
   const [targetWord, setTargetWord] = useState<string>("");
+  const [error, setError] = useState<Error | null>(null as Error | null);
 
   const fetchData = useCallback(async () => {
-    const word = await fetchWord();
-    setTargetWord(word);
+    try {
+      const response = await fetchWord();
+      setTargetWord(response);
+    } catch (error) {
+      setError(error as Error);
+    }
   }, []);
 
   const resetGame = () => {
@@ -135,6 +141,7 @@ export const useGameLogic = (): GameState => {
     guesses,
     feedback,
     currentGuess,
+    error,
     keys,
     handleLetterInput,
     handleBackspace,

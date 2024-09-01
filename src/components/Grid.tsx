@@ -1,6 +1,7 @@
 // components/Grid.tsx
 import React from "react";
 import "./Grid.css";
+import { WORD_SIZE } from "../constants";
 
 interface GridProps {
   guesses: string[];
@@ -16,7 +17,7 @@ const Grid: React.FC<GridProps> = ({ guesses, feedback, currentGuess }) => {
 
     return (
       <div className="grid-row" data-testid="grid-row" key={rowIndex}>
-        {Array.from({ length: 5 }).map((_, colIndex) => (
+        {Array.from({ length: WORD_SIZE }).map((_, colIndex) => (
           <div
             key={colIndex}
             data-testid="grid-cell"
@@ -31,7 +32,9 @@ const Grid: React.FC<GridProps> = ({ guesses, feedback, currentGuess }) => {
 
   return (
     <div className="grid">
-      {Array.from({ length: 5 }).map((_, rowIndex) => renderRow(rowIndex))}
+      {Array.from({ length: WORD_SIZE }).map((_, rowIndex) =>
+        renderRow(rowIndex)
+      )}
     </div>
   );
 };

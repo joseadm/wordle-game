@@ -31,19 +31,19 @@
 }
   
   .grid-cell.green {
-    background-color: #538d4e; /* Green background for correct letters */
+    background-color: var(--green); /* Green background for correct letters */
   }
   
   .grid-cell.orange {
-    background-color: #b59f3b; /* Orange background for misplaced letters */
+    background-color: var(--orange); /* Orange background for misplaced letters */
   }
   
   .grid-cell.no-color {
-    background-color: #3a3a3c; /* Default background for wrong letters */
+    background-color: var(--gray); /* Default background for wrong letters */
   }
   
   body {
-    background-color: #121213; /* Dark background for the entire app */
+    background-color: var(--dark);; /* Dark background for the entire app */
     color: white;
     font-family: 'Arial', sans-serif;
   }

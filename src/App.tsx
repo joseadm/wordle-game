@@ -19,6 +19,7 @@ const App: React.FC = () => {
     gameState,
     guesses,
     feedback,
+    error,
     currentGuess,
     keys,
     handleLetterInput,
@@ -27,9 +28,13 @@ const App: React.FC = () => {
     resetGame,
   } = useGameLogic();
 
+  if (error) {
+    throw new Error(error.message);
+  }
+
   return (
     <Suspense fallback={<Loading />}>
-      <div className="app">
+      <div className="app" data-testid="app">
         <Grid
           guesses={guesses}
           feedback={feedback}
