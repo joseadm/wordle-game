@@ -1,15 +1,21 @@
 // components/Grid.tsx
 import React from "react";
 import "./Grid.css";
-import { WORD_SIZE } from "../constants";
+import { TRIES, WORD_SIZE } from "../constants";
 
 interface GridProps {
   guesses: string[];
   feedback: string[][];
   currentGuess: string;
+  wordSize: number;
 }
 
-const Grid: React.FC<GridProps> = ({ guesses, feedback, currentGuess }) => {
+const Grid: React.FC<GridProps> = ({
+  guesses,
+  feedback,
+  currentGuess,
+  wordSize,
+}) => {
   const renderRow = (rowIndex: number) => {
     const guess =
       rowIndex === guesses.length ? currentGuess : guesses[rowIndex] || "";
@@ -17,7 +23,7 @@ const Grid: React.FC<GridProps> = ({ guesses, feedback, currentGuess }) => {
 
     return (
       <div className="grid-row" data-testid="grid-row" key={rowIndex}>
-        {Array.from({ length: WORD_SIZE }).map((_, colIndex) => (
+        {Array.from({ length: wordSize }).map((_, colIndex) => (
           <div
             key={colIndex}
             data-testid="grid-cell"
@@ -33,7 +39,7 @@ const Grid: React.FC<GridProps> = ({ guesses, feedback, currentGuess }) => {
   return (
     <div className="grid-container">
       <div className="grid">
-        {Array.from({ length: WORD_SIZE }).map((_, rowIndex) =>
+        {Array.from({ length: TRIES }).map((_, rowIndex) =>
           renderRow(rowIndex)
         )}
       </div>

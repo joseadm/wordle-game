@@ -1,6 +1,8 @@
 import { GameStatus } from "./types";
 
 export const WORD_SIZE = 5;
+export const TRIES = 5;
+
 export const EVENT_KEY_ENTER = "Enter";
 export const EVENT_KEY_BACKSPACE = "Backspace";
 export const EVENT_KEY_DOWN = "keydown";

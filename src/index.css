@@ -13,6 +13,7 @@
   --loading-spiner-line: #3498db;
   --keyboard-active-color: #6b6b6b;
   --keyboard-hover-color: #525252;
+  --word-size: 5;
 }
 
 body {

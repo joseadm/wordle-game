@@ -12,7 +12,7 @@ test("renders the correct guess in each cell", () => {
   const currentGuess = "JKL";
 
   const { getAllByTestId } = render(
-    <Grid guesses={guesses} feedback={feedback} currentGuess={currentGuess} />
+    <Grid guesses={guesses} feedback={feedback} currentGuess={currentGuess} wordSize={5} />
   );
 
   const cells = getAllByTestId("grid-cell");

@@ -13,7 +13,7 @@
 
 .grid-row {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(var(--word-size), 1fr);
   gap: 10px;
   justify-content: center; /* Center the grid horizontally */
   align-items: center; /* Center the grid vertically */
