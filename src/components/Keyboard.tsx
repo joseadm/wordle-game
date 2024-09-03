@@ -31,13 +31,14 @@ const Keyboard: React.FC<KeyboardProps> = ({
   };
 
   return (
-    <div className="keyboard-container">
+    <section className="keyboard-container">
       <div className="keyboard">
         {keys.map((row, rowIndex) => (
           <div key={rowIndex} className="keyboard-row">
             {row.map((key) => (
               <button
                 key={key}
+                aria-label={`${key}-key`}
                 data-testid={`${key}-key`}
                 onClick={() => handleKeyClick(key)}
                 className={`keyboard-key ${
@@ -51,6 +52,7 @@ const Keyboard: React.FC<KeyboardProps> = ({
         ))}
         <div className="keyboard-row">
           <button
+            aria-label="keyboard-button"
             data-testid="enter-button"
             onClick={() => handleKeyClick("Enter")}
             className="keyboard-key enter-key"
@@ -58,6 +60,7 @@ const Keyboard: React.FC<KeyboardProps> = ({
             {t("keyboard.enter_button")}
           </button>
           <button
+            aria-label="backaspace-button"
             data-testid="backspace-button"
             onClick={() => handleKeyClick("Backspace")}
             className="keyboard-key backspace-key"
@@ -66,7 +69,7 @@ const Keyboard: React.FC<KeyboardProps> = ({
           </button>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

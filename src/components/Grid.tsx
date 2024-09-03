@@ -1,7 +1,7 @@
-// components/Grid.tsx
 import React from "react";
 import "./Grid.css";
 import { TRIES, WORD_SIZE } from "../constants";
+import GridRow from "./GridRow";
 
 interface GridProps {
   guesses: string[];
@@ -22,28 +22,23 @@ const Grid: React.FC<GridProps> = ({
     const rowFeedback = feedback[rowIndex] || [];
 
     return (
-      <div className="grid-row" data-testid="grid-row" key={rowIndex}>
-        {Array.from({ length: wordSize }).map((_, colIndex) => (
-          <div
-            key={colIndex}
-            data-testid="grid-cell"
-            className={`grid-cell ${rowFeedback[colIndex] || ""}`}
-          >
-            {guess[colIndex] || ""}
-          </div>
-        ))}
-      </div>
+      <GridRow
+        key={rowIndex}
+        guess={guess}
+        feedback={rowFeedback}
+        wordSize={wordSize}
+      />
     );
   };
 
   return (
-    <div className="grid-container">
+    <section className="grid-container">
       <div className="grid">
         {Array.from({ length: TRIES }).map((_, rowIndex) =>
           renderRow(rowIndex)
         )}
       </div>
-    </div>
+    </section>
   );
 };
 
