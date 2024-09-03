@@ -1,6 +1,6 @@
 import React from "react";
 import "./Grid.css";
-import { TRIES, WORD_SIZE } from "../constants";
+import { TRIES } from "../constants";
 import GridRow from "./GridRow";
 
 interface GridProps {
